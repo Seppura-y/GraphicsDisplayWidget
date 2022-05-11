@@ -22,7 +22,7 @@ ResizeableWidget::ResizeableWidget(QColor c, QWidget* parent)
     , m_ignoreMouse(false)
 {
     // prevents this widget from consuming CaptureToolButton mouse events
-    setAttribute(Qt::WA_TransparentForMouseEvents);
+    //setAttribute(Qt::WA_TransparentForMouseEvents);
     setStyleSheet("background-color:transparent");
     //parent->installEventFilter(this);
 
@@ -48,7 +48,7 @@ ResizeableWidget::ResizeableWidget(QColor c, QWidget* parent)
 
     updateAreas();
 
-    image_ = new QImage(":/GraphicsDisplayWidget/C:/Users/y7513/Desktop/9c5bbafec011cdbfc70d768223432bf5.png");
+    //image_ = new QImage(":/GraphicsDisplayWidget/C:/Users/y7513/Desktop/9c5bbafec011cdbfc70d768223432bf5.png");
     //img(QString(":/GraphicsDisplayWidget/C:/Users/y7513/Desktop/9c5bbafec011cdbfc70d768223432bf5.png"));
 
 
@@ -150,36 +150,36 @@ void ResizeableWidget::updateCursor(QPoint point)
 
     switch (mouseSide) {
     case TOPLEFT_SIDE:
-        qDebug() << "TOPLEFT_SIDE";
+        //qDebug() << "TOPLEFT_SIDE";
         //setCursor(Qt::SizeFDiagCursor);
         QApplication::setOverrideCursor(Qt::SizeFDiagCursor);
         break;
     case BOTTOMRIGHT_SIDE:
-        qDebug() << "BOTTOMRIGHT_SIDE";
+        //qDebug() << "BOTTOMRIGHT_SIDE";
         QApplication::setOverrideCursor(Qt::SizeFDiagCursor);
         break;
     case TOPRIGHT_SIDE:
-        qDebug() << "TOPRIGHT_SIDE";
+        //qDebug() << "TOPRIGHT_SIDE";
         QApplication::setOverrideCursor(Qt::SizeBDiagCursor);
         break;
     case BOTTOMLEFT_SIDE:
-        qDebug() << "BOTTOMLEFT_SIDE";
+        //qDebug() << "BOTTOMLEFT_SIDE";
         QApplication::setOverrideCursor(Qt::SizeBDiagCursor);
         break;
     case LEFT_SIDE:
-        qDebug() << "LEFT_SIDE";
+        //qDebug() << "LEFT_SIDE";
         QApplication::setOverrideCursor(Qt::SizeHorCursor);
         break;
     case RIGHT_SIDE:
-        qDebug() << "RIGHT_SIDE";
+        //qDebug() << "RIGHT_SIDE";
         QApplication::setOverrideCursor(Qt::SizeHorCursor);
         break;
     case TOP_SIDE:
-        qDebug() << "TOP_SIDE";
+        //qDebug() << "TOP_SIDE";
         QApplication::setOverrideCursor(Qt::SizeVerCursor);
         break;
     case BOTTOM_SIDE:
-        qDebug() << "BOTTOM_SIDE";
+        //qDebug() << "BOTTOM_SIDE";
         QApplication::setOverrideCursor(Qt::SizeVerCursor);
         break;
     default:
@@ -188,7 +188,7 @@ void ResizeableWidget::updateCursor(QPoint point)
         }
         else {
             //setCursor(m_idleCentralCursor);
-            qDebug() << "ArrowCursor";
+            //qDebug() << "ArrowCursor";
             QApplication::setOverrideCursor(Qt::ArrowCursor);
             return;
         }
@@ -202,7 +202,7 @@ void ResizeableWidget::updateCursor(QPoint point)
 void ResizeableWidget::paintEvent(QPaintEvent*)
 {
     QPainter p(this);
-    p.drawImage(rect(), *image_);
+    p.drawImage(rect(), image_);
     QPen pen = p.pen();
     pen.setStyle(Qt::SolidLine);
     pen.setWidth(2);
@@ -564,4 +564,16 @@ void ResizeableWidget::parentMouseMoveEvent(QMouseEvent* e)
         m_activeSide = getProperSide(m_activeSide, geom);
     }
     m_dragStartPos = pos;
+}
+
+void ResizeableWidget::setImageData(const unsigned char* raw_data,int width,int height)
+{
+    //auto b = image_.loadFromData(raw_data, size);
+    //image_ = QImage::fromData(raw_data, size);
+    image_ = QImage(raw_data, width, height, QImage::Format::Format_RGBX8888);
+    if (first_save_)
+    {
+        image_.save("out.jpg");
+        first_save_ = false;
+    }
 }

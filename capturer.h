@@ -28,6 +28,9 @@ public:
 	int getInputHeight();
 	void setOutputSize(int width,int height);
 
+	unsigned char* getImageData();
+	int getImageSize();
+
 private:
 	int g_Width_ = -1;
 	int g_Height_ = -1;

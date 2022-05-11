@@ -120,3 +120,13 @@ void CaptureThread::set_next(XThread* thread)
 	unique_lock<mutex> lock(mtx_);
 	next_ = thread;
 }
+
+unsigned char* CaptureThread::getImageData()
+{
+	return capture_.getImageData();
+}
+
+int CaptureThread::getImageSize()
+{
+	return capture_.getImageSize();
+}

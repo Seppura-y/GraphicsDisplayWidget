@@ -15,6 +15,8 @@ public:
 	bool InitScale(int oWidth, int oHeight);
 
 	AVFrame* GetFrame();
+	unsigned char* getImageData();
+	int getImageSize();
 	int getInputWidth();
 	int getInputHeight();
 	void setOutputSize(int width, int height);

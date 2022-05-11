@@ -1,6 +1,8 @@
 #include "capturer.h"
 #include "XTools.h"
 #include <iostream>
+
+#include <QImage>
 extern"C"
 {
 #include "libavcodec/avcodec.h"
@@ -320,4 +322,14 @@ AVFrame* Capture::GetCapturedFrame()
     bool success = CaptureImgData(pImgData_, plinesize_[0]);
     if (!success)return nullptr;
     return ImgDataScale(pImgData_, linesize);
+}
+
+unsigned char* Capture::getImageData()
+{
+    return pImgData_;
+}
+
+int Capture::getImageSize()
+{
+    return g_Width_ * g_Height_ * 4;
 }

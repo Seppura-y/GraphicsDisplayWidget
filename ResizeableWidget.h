@@ -30,6 +30,7 @@ public:
     void setGeometry(const QRect& r);
     QRect geometry() const;
 
+    void setImageData(const unsigned char* data,int width,int height);
 signals:
     void sig_SizeChanged();
 protected:
@@ -78,6 +79,8 @@ private:
     QRect m_TLArea, m_TRArea, m_BLArea, m_BRArea;
     QRect m_LArea, m_TArea, m_RArea, m_BArea;
 
-    QImage* image_ = nullptr;
+    //QImage* image_ = nullptr;
+    QImage image_;
+    bool first_save_ = true;
 };
 
