@@ -271,6 +271,7 @@ void ResizeableWidget::mousePressEvent(QMouseEvent* e)
     m_dragStartPos = e->pos();
     m_activeSide = getMouseSide(e->pos());
 
+    left_bt_clicked_ = true;
     //m_dragStartPos = parentWidget()->mapFromGlobal(QCursor::pos());
     //m_activeSide = getMouseSide(parentWidget()->mapFromGlobal(QCursor::pos()));
 }
@@ -310,11 +311,16 @@ void ResizeableWidget::mouseMoveEvent(QMouseEvent* e)
     //    setGeometry({ e->pos(), e->pos() });
     //}
 
+    if (!left_bt_clicked_)return;
+    //QPoint pos = QPoint(QWidget::geometry().x(), QWidget::geometry().y());
     QPoint pos = e->pos();
+    pos = parentWidget()->mapToGlobal(QCursor::pos());
     //QPoint pos = parentWidget()->mapFromGlobal(QCursor::pos());
     auto geom = geometry();
     //bool symmetryMod = qApp->keyboardModifiers() & Qt::ShiftModifier;
 
+
+    qDebug() << "e->pos() : x->" << pos.x() << " y->" << pos.y();
     QPoint newTopLeft = geom.topLeft(), newBottomRight = geom.bottomRight();
     int& newLeft = newTopLeft.rx(), & newRight = newBottomRight.rx(),
         & newTop = newTopLeft.ry(), & newBottom = newBottomRight.ry();
@@ -363,8 +369,8 @@ void ResizeableWidget::mouseMoveEvent(QMouseEvent* e)
         break;
     default:
         if (m_activeSide) {
-            move(this->pos() + pos - m_dragStartPos);
-            m_dragStartPos = pos;
+            //move(this->pos() + pos - m_dragStartPos);
+            //m_dragStartPos = pos;
         }
         //return;
         break;
@@ -381,11 +387,11 @@ void ResizeableWidget::mouseMoveEvent(QMouseEvent* e)
         geom = { newTopLeft, newBottomRight };
         setGeometry(geom.normalized());
         //setGeometry(geom);
-        m_activeSide = getProperSide(m_activeSide, geom);
+        //m_activeSide = getProperSide(m_activeSide, geom);
 
         //qDebug() << "resize : x->" << geom.x() << " y->" << geom.y() << " width : " << geom.width() << " height : " << geom.height();
     }
-    m_dragStartPos = pos;
+    //m_dragStartPos = pos;
 }
 
 // helper function

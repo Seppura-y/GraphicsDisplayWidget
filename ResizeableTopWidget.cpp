@@ -14,7 +14,7 @@ ResizeableTopWidget::ResizeableTopWidget(QColor c, QWidget* parent)
     , m_ignoreMouse(false)
 {
     // prevents this widget from consuming CaptureToolButton mouse events
-    setAttribute(Qt::WA_TransparentForMouseEvents);
+    //setAttribute(Qt::WA_TransparentForMouseEvents);
     //parent->installEventFilter(this);
 
     setWindowFlags(Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint);

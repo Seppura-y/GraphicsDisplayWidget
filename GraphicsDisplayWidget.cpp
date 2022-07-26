@@ -3,6 +3,7 @@
 #include "SelectionWidget.h"
 #include "ResizeableWidget.h"
 #include "ResizeableTopWidget.h"
+#include "capture_view.h"
 
 #include "capture_thread.h"
 
@@ -45,6 +46,7 @@ GraphicsDisplayWidget::GraphicsDisplayWidget(QWidget *parent) : QMainWindow(pare
     gfx_scene_ = new QGraphicsScene(0, 0, width, height, ui.centralWidget);
 
     gfx_view_ = new QGraphicsView(gfx_scene_, ui.centralWidget);
+    //gfx_view_ = new CaptureView(gfx_scene_, ui.centralWidget);
     gfx_view_->setGeometry(0, 0, 1280, 720);
     gfx_view_->setRenderHint(QPainter::Antialiasing);
     gfx_view_->setBackgroundBrush(*brush);
@@ -65,9 +67,14 @@ GraphicsDisplayWidget::GraphicsDisplayWidget(QWidget *parent) : QMainWindow(pare
     content_wid_->setAttribute(Qt::WA_TransparentForMouseEvents);
 
 
-    //auto* resize_top_wid = new ResizeableTopWidget(QColor("darkorange"));
+    auto* resize_top_wid = new ResizeableTopWidget(QColor("darkorange"));
+    resize_top_wid->show();
+
     resize_wid_ = new ResizeableWidget(QColor("darkorange"));
-    gfx_scene_->addWidget(resize_wid_);
+    auto px_wid = gfx_scene_->addWidget(resize_wid_);
+    //auto* px_wid = new QGraphicsProxyWidget();
+    //px_wid->setWidget(resize_wid_);
+    //px_wid->setGeometry(QRect(300, 50, 100, 100));
 
     //auto* resize_wid = new ResizeableWidget(QColor("orange"));
     resize_wid_->QWidget::setGeometry(QRect(300, 50, 800, 600));
@@ -86,7 +93,10 @@ GraphicsDisplayWidget::GraphicsDisplayWidget(QWidget *parent) : QMainWindow(pare
 
     //gfx_scene_->addItem(handle); // adding to scene 
 
-
+    //2022.7.20
+    //auto* resize_wid = new ResizeableWidget(QColor("orange"));
+    //resize_wid->QWidget::setGeometry(QRect(300, 50, 800, 600));
+    //resize_wid->show();
 
     bool ret = true;
     cap_th_ = new CaptureThread();
@@ -126,8 +136,10 @@ void GraphicsDisplayWidget::mouseDoubleClickEvent(QMouseEvent* ev)
 {
     if (rect_handle_ && content_wid_)
     {
+        //content_wid_->setGeometry(content_wid_->geometry().adjusted(0, 0, 5, 5));
+        //rect_handle_->setRect(content_wid_->geometry().adjusted(0,0,10,10));
         content_wid_->setGeometry(content_wid_->geometry().adjusted(0, 0, 5, 5));
-        rect_handle_->setRect(content_wid_->geometry().adjusted(0,0,10,10));
+        rect_handle_->setRect(content_wid_->geometry().adjusted(0, 0, 10, 10));
     }
 }
 

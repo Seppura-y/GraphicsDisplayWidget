@@ -4,6 +4,9 @@
 #include <QApplication>
 #include <QGraphicsSceneMouseEvent>
 
+#include "ResizeableTopWidget.h"
+#include "ResizeableWidget.h"
+
 //https://gist.github.com/benjbaron/532a476560f3d7085bda
 
 class CustomItem : public QGraphicsEllipseItem

@@ -82,5 +82,7 @@ private:
     //QImage* image_ = nullptr;
     QImage image_;
     bool first_save_ = true;
+
+    bool left_bt_clicked_ = false;
 };
 
