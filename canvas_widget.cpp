@@ -2,6 +2,12 @@
 
 #include "canvas_view.h"
 
+#include <iostream>
+
+#include <QMouseEvent>
+
+using namespace std;
+
 CanvasWidget::CanvasWidget(QWidget* parent) : QMainWindow(parent)
 {
 	setWindowTitle("CanvasWidget");
@@ -19,4 +25,16 @@ void CanvasWidget::resizeEvent(QResizeEvent * ev)
 {
 	view_->setGeometry(0, 0, this->width(), this->height());
 	QWidget::resizeEvent(ev);
+}
+
+void CanvasWidget::mousePressEvent(QMouseEvent* ev)
+{
+	cout << "canvas widget " << ev->pos().x() << " : " << ev->pos().y() << endl;
+	//QWidget::mousePressEvent(ev);
+}
+
+void CanvasWidget::mouseReleaseEvent(QMouseEvent* ev)
+{
+	cout << "canvas widget mouse release" << endl;
+	QWidget::mouseReleaseEvent(ev);
 }

@@ -74,6 +74,8 @@ QGraphicsItem* CanvasScene::getFirstItemUnderCursor(const QPointF& p)
 void CanvasScene::mousePressEvent(QGraphicsSceneMouseEvent* event)
 {
     cout << "canvas scene mouse pressed : " << event->scenePos().x() << " " << event->scenePos().y() << endl;
+    //cout << "canvas scene mouse global : " << mapToGlobal(event->scenePos().x()) << " " << event->scenePos().y() << endl;
+    cout << "canvas scene bounding rect : " << sceneRect().x() << " : " << sceneRect().y() << " : " << sceneRect().width() << " : " << sceneRect().height() << endl;
 
     auto item = getFirstItemUnderCursor(event->scenePos());
     if (item && item->type() != CanvasItemGroup::eBorderDot && item->type() != eBackgroundItem) 
@@ -303,6 +305,7 @@ void CanvasScene::onSigDelete(QPointF p)
     if (item)
     {
         this->removeItem(item);
+        l_items_.removeOne(item);
         delete item;
     }
 }
@@ -310,6 +313,12 @@ void CanvasScene::onSigDelete(QPointF p)
 void CanvasScene::fooSlot()
 {
     cout << "foo slot" << endl;
+}
+
+void CanvasScene::AddCustomItem(QGraphicsItem* item)
+{
+    l_items_.push_back(item);
+    this->addItem(item);
 }
 
 void CanvasScene::AddImageItem(QPoint pos, QString url, uint64_t z)
@@ -331,9 +340,12 @@ void CanvasScene::onAddImageItem()
     path.addRect(this->sceneRect());
 
     CanvasItem* item = new CanvasItem(img_url, z_value_ + 1);
-    item->setFlags(QGraphicsItem::ItemIsSelectable | QGraphicsItem::ItemIsMovable | QGraphicsItem::ItemIsFocusable);
+    //item->setFlags(QGraphicsItem::ItemIsSelectable | QGraphicsItem::ItemIsMovable | QGraphicsItem::ItemIsFocusable);
+    //item->setFlags(QGraphicsItem::ItemIsSelectable | QGraphicsItem::ItemIsMovable | QGraphicsItem::ItemIsFocusable);
     item->setBoundaryPath(path);
     this->addItem(item);
+    l_items_.push_back(item);
+    
 }
 
 void CanvasScene::onDeleteItem()
@@ -343,6 +355,7 @@ void CanvasScene::onDeleteItem()
     {
         this->setFocusItem(nullptr);
         item_group_->removeItemFromGroup(item);
+        l_items_.removeOne(item);
         this->removeItem(item);
         delete item;
     }
@@ -350,6 +363,54 @@ void CanvasScene::onDeleteItem()
 
 bool CanvasScene::IsEmpty()
 {
-    return v_items_.empty();
+    return l_items_.empty();
 }
 
+void CanvasScene::ItemsTransformation(QTransform matrix)
+{
+    for (auto i : l_items_)
+    {
+        auto item = qgraphicsitem_cast<CanvasItem*>(i);
+        if (item)
+        {
+            QRectF rect = item->boundingRect();
+
+            QRectF rect_map = matrix.mapRect(rect);
+
+            item->setTransform(matrix);
+
+            item->setRect(rect_map);
+            item->update_count++;
+        }
+
+    }
+}
+
+void CanvasScene::ItemsTransformation(qreal scalar,int x,int y)
+{
+    for (auto i : l_items_)
+    {
+        auto item = qgraphicsitem_cast<CanvasItem*>(i);
+        if (item)
+        {
+            //QRectF rect = item->boundingRect();
+            //QRectF rect = item->getRect();
+            //QRectF rect_map = matrix.mapRect(rect);
+
+            //item->setPos(rect.x(), rect.y());
+            //item->setRect(rect_map);
+            //item->update();
+
+            QRectF rect = item->boundingRect();
+
+            QTransform tf(1, 0, 0, 0, 1, 0, 0, 0, 1);
+            tf.scale(scalar, scalar);
+            tf.translate(x, y);
+            QRectF rect_map = tf.mapRect(rect);
+
+            item->setTransform(tf);
+            item->setRect(rect_map);
+            item->prepareChange();
+        }
+    }
+}

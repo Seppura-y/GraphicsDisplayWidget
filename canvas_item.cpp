@@ -16,7 +16,8 @@ CanvasItem::CanvasItem(uint64_t zc, QGraphicsRectItem* parent) : QGraphicsRectIt
 {
     setZValue(z_value_);
 
-    qimage_ = new QImage(":/GraphicsDisplayWidget/C:/Users/y7513/Desktop/IMG_20170903_085200.jpg");
+    //qimage_ = new QImage(":/GraphicsDisplayWidget/C:/Users/y7513/Desktop/IMG_20170903_085200.jpg");
+    qimage_ = new QImage(":/GraphicsDisplayWidget/C:/Users/y7513/Desktop/screen.jpg");
     //qInfo() << qimage_->width() << ' ' << qimage_->height() << " SIZE=" << qimage_->sizeInBytes();
     pixmap_ = QPixmap::fromImage(*qimage_);
     _size = pixmap_.size();
@@ -24,7 +25,7 @@ CanvasItem::CanvasItem(uint64_t zc, QGraphicsRectItem* parent) : QGraphicsRectIt
 
     setAcceptHoverEvents(true);
     setFlag(QGraphicsItem::ItemIsMovable, true);
-    setFlag(QGraphicsItem::ItemIsSelectable, true);
+    setFlag(QGraphicsItem::ItemIsSelectable, false);
     setFlag(QGraphicsItem::ItemIsFocusable, true);
 
     aspect_ratio_.width = rect_.width();
@@ -47,7 +48,7 @@ CanvasItem::CanvasItem(QString path, uint64_t z, QGraphicsRectItem* parent) : QG
 
     setAcceptHoverEvents(true);
     setFlag(QGraphicsItem::ItemIsMovable, true);
-    setFlag(QGraphicsItem::ItemIsSelectable, true);
+    setFlag(QGraphicsItem::ItemIsSelectable, false);
     setFlag(QGraphicsItem::ItemIsFocusable, true);
 }
 
@@ -68,7 +69,7 @@ CanvasItem::CanvasItem(int width, int height, uint64_t z, QGraphicsRectItem* par
 
     setAcceptHoverEvents(true);
     setFlag(QGraphicsItem::ItemIsMovable, true);
-    setFlag(QGraphicsItem::ItemIsSelectable, true);
+    setFlag(QGraphicsItem::ItemIsSelectable, false);
     setFlag(QGraphicsItem::ItemIsFocusable, true);
 }
 
@@ -150,4 +151,24 @@ void CanvasItem::setRect(const QRectF& rect)
 {
     rect_ = rect;
     QGraphicsRectItem::setRect(rect);
+}
+
+void CanvasItem::setOriginRect(QRectF& rect)
+{
+    origin_rect_ = rect;
+}
+
+void CanvasItem::setPreviousRect(QRectF& rect)
+{
+    previous_rect_ = rect;
+}
+
+void CanvasItem::setClippedRect(QRectF& rect)
+{
+    clipped_rect_ = rect;
+}
+
+void CanvasItem::prepareChange()
+{
+    prepareGeometryChange();
 }

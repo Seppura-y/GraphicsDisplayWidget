@@ -1,18 +1,18 @@
 #include "GraphicsDisplayWidget.h"
 #include "canvas_widget.h"
 //
-//#include <QtWidgets/QApplication>
-//
-//int main(int argc, char *argv[])
-//{
-//    QApplication a(argc, argv);
-//    GraphicsDisplayWidget w;
-//    w.show();
-//
-//    //CanvasWidget cw;
-//    //cw.show();
-//    return a.exec();
-//}
+#include <QtWidgets/QApplication>
+
+int main(int argc, char *argv[])
+{
+    QApplication a(argc, argv);
+    GraphicsDisplayWidget w;
+    w.show();
+
+    //CanvasWidget cw;
+    //cw.show();
+    return a.exec();
+}
 
 #include <QApplication>
 #include <QGraphicsRectItem>
@@ -48,7 +48,7 @@ private:
     QPainterPath m_boundaryPath;
 };
 
-int main(int argc, char* argv[]) {
+int main1(int argc, char* argv[]) {
     QApplication a(argc, argv);
     //QGraphicsView view;
 

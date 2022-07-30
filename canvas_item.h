@@ -28,6 +28,8 @@ public:
     const QImage* qimage_ptr_const() { return qimage_; }
     QImage* qimage_ptr() { return qimage_; }
     uint64_t& zcounter() noexcept { return z_value_; }
+
+    void prepareChange();
 signals:
 
 public:
@@ -61,10 +63,14 @@ public:
     void setBoundaryPath(const QPainterPath& boundaryPath);
 
 public:
+    void setOriginRect(QRectF& rect);
+    void setPreviousRect(QRectF& rect);
+    void setClippedRect(QRectF& rect);
     QRectF origin_rect_;
     QRectF previous_rect_;
     QRectF clipped_rect_;
 
+    int update_count = 0;
 signals:
 
 protected slots:
@@ -72,13 +78,15 @@ protected slots:
 private:
     QPainterPath boundary_path_;
 
-    QPointF previous_coordinate_;
-    QPointF clipped_coordinate_;
+    //QPointF previous_coordinate_;
+    //QPointF clipped_coordinate_;
 
 
 
     ItemsAspectRatio aspect_ratio_;
 
     QMenu menu_;
+
+
 };
 

@@ -14,6 +14,8 @@ public:
 
 protected:
 	void resizeEvent(QResizeEvent* ev) override;
+	void mousePressEvent(QMouseEvent* ev) override;
+	void mouseReleaseEvent(QMouseEvent* ev) override;
 private:
 	CanvasView* view_ = nullptr;
 };

@@ -109,12 +109,16 @@ private:
     QMenu menu_;
     QMenu item_menu_;
 
-    QVector<QGraphicsItem*> v_items_;
+    //QVector<QGraphicsItem*> v_items_;
+    QList<QGraphicsItem*> l_items_;
     
 public:
     void setSceneBoundaryRect();
     void AddImageItem(QPoint pos, QString url, uint64_t z);
     bool IsEmpty();
+    void ItemsTransformation(QTransform matrix);
+    void ItemsTransformation(qreal scalar,int x,int y);
+    void AddCustomItem(QGraphicsItem* item);
 signals:
     void sigDelete(QPointF p);
     //void sigDelete();

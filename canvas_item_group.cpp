@@ -100,6 +100,12 @@ void CanvasItemGroup::mouseMoveEvent(QGraphicsSceneMouseEvent* event)
 void CanvasItemGroup::mousePressEvent(QGraphicsSceneMouseEvent* ev)
 {
     cout << "item group mouse pressed : " << ev->pos().x() << " " << ev->pos().y() << endl;
+    cout << "item group pos : " << this->pos().x() << " " << this->pos().y() << endl;
+    //cout << "item group scene pos : " << mapToScene(this->pos()).x() << " : " << mapToScene(this->pos()).y() << endl << endl;
+    cout << "item group scene pos : " << this->scenePos().x() << " : " << this->scenePos().y() << endl;
+    cout << "item group scene bounding rect : " << sceneBoundingRect().x() << " : " << sceneBoundingRect().y() << endl;
+    cout << "item group current scene bounding rect : " << currentSceneBoundingRect().x() << " : " << currentSceneBoundingRect().y() << endl;
+    cout << endl;
 
     setZValue(++z_value_);
     shiftMouseCoords_ = (this->pos() - mapToScene(ev->pos())) / scale();
