@@ -15,6 +15,7 @@ class Capture
 public:
 
 	bool CaptureInit();
+	void captureUnInit();
 	bool ScaleInit();
 
 	bool CaptureImgData(void* pImgData, INT& nImgSize);

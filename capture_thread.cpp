@@ -50,6 +50,7 @@ void CaptureThread::Task()
 		this_thread::sleep_for(1ms);
 	}
 	
+	capture_.captureUnInit();
 }
 void CaptureThread::do_next(AVFrame* frame)
 {

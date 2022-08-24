@@ -2,6 +2,7 @@
 #include "canvas_item_group.h"
 #include "canvas_header.h"
 #include "canvas_item.h"
+#include "canvas_display_item.h"
 
 
 #include <cmath>
@@ -271,9 +272,14 @@ void CanvasScene::setSceneBoundaryRect()
             //cout << "iter scene pos " << iter->scenePos().x() << " : " << iter->scenePos().y() << endl;
             //cout << "iter pos " << iter->pos().x() << " : " << iter->pos().y() << endl << endl;;
             //CanvasItem item = qgraphicsitem_cast<CanvasItem>(iter);
-            CanvasItem* item = dynamic_cast<CanvasItem*>(iter);
-            if(item)
+            //CanvasItem* item = dynamic_cast<CanvasItem*>(iter);
+            CanvasDisplayItem* item = dynamic_cast<CanvasDisplayItem*>(iter);
+            if (item)
+            {
                 item->setBoundaryPath(path);
+                item->setParentSceneRect(this->sceneRect());
+            }
+
         }
     }
 }
@@ -334,15 +340,17 @@ void CanvasScene::AddImageItem(QPoint pos, QString url, uint64_t z)
 
 void CanvasScene::onAddImageItem()
 {
-    QString img_url = QFileDialog::getOpenFileName(nullptr, QString::fromLocal8Bit("选择文件"), QString("/"), QString("Files (*.jpg)"));
+    //QString img_url = QFileDialog::getOpenFileName(nullptr, QString::fromLocal8Bit("选择文件"), QString("/"), QString("Files (*.jpg)"));
 
     QPainterPath path;
     path.addRect(this->sceneRect());
 
-    CanvasItem* item = new CanvasItem(img_url, z_value_ + 1);
+    //CanvasItem* item = new CanvasItem(img_url, z_value_ + 1);
+    CanvasDisplayItem* item = new CanvasDisplayItem(z_value_ + 1);
     //item->setFlags(QGraphicsItem::ItemIsSelectable | QGraphicsItem::ItemIsMovable | QGraphicsItem::ItemIsFocusable);
     //item->setFlags(QGraphicsItem::ItemIsSelectable | QGraphicsItem::ItemIsMovable | QGraphicsItem::ItemIsFocusable);
     item->setBoundaryPath(path);
+    item->setParentSceneRect(this->sceneRect());
     this->addItem(item);
     l_items_.push_back(item);
     
@@ -370,7 +378,7 @@ void CanvasScene::ItemsTransformation(QTransform matrix)
 {
     for (auto i : l_items_)
     {
-        auto item = qgraphicsitem_cast<CanvasItem*>(i);
+        auto item = qgraphicsitem_cast<CanvasDisplayItem*>(i);
         if (item)
         {
             QRectF rect = item->boundingRect();
@@ -380,7 +388,6 @@ void CanvasScene::ItemsTransformation(QTransform matrix)
             item->setTransform(matrix);
 
             item->setRect(rect_map);
-            item->update_count++;
         }
 
     }

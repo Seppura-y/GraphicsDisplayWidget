@@ -203,39 +203,39 @@ void ResizeableWidget::paintEvent(QPaintEvent*)
 {
     QPainter p(this);
     p.drawImage(rect(), image_);
-    QPen pen = p.pen();
-    pen.setStyle(Qt::SolidLine);
-    pen.setWidth(2);
-    pen.setColor(m_color);
-    p.setPen(pen);
-    //p.drawRect(rect() + QMargins(0, 0, -1, -1));
-    p.drawRect(rect());
-    p.setRenderHint(QPainter::Antialiasing);
-    p.setBrush(m_color);
+    //QPen pen = p.pen();
+    //pen.setStyle(Qt::SolidLine);
+    //pen.setWidth(2);
+    //pen.setColor(m_color);
+    //p.setPen(pen);
+    ////p.drawRect(rect() + QMargins(0, 0, -1, -1));
+    //p.drawRect(rect());
+    //p.setRenderHint(QPainter::Antialiasing);
+    //p.setBrush(m_color);
 
-    for (auto rect : handlerAreas()) {
+    //for (auto rect : handlerAreas()) {
 
-        pen = p.pen();
-        pen.setStyle(Qt::SolidLine);
-        pen.setColor("white");
-        p.setPen(pen);
+    //    pen = p.pen();
+    //    pen.setStyle(Qt::SolidLine);
+    //    pen.setColor("white");
+    //    p.setPen(pen);
 
-        p.setRenderHint(QPainter::Antialiasing);
-        QBrush brush;
-        brush.setStyle(Qt::SolidPattern);
-        brush.setColor("white");
-        p.setBrush(brush);
+    //    p.setRenderHint(QPainter::Antialiasing);
+    //    QBrush brush;
+    //    brush.setStyle(Qt::SolidPattern);
+    //    brush.setColor("white");
+    //    p.setBrush(brush);
 
-        p.drawEllipse(rect.center(), 6, 6);
+    //    p.drawEllipse(rect.center(), 6, 6);
 
-        pen.setColor("orange");
-        brush.setColor("orange");
+    //    pen.setColor("orange");
+    //    brush.setColor("orange");
 
-        p.setPen(pen);
-        p.setBrush(brush);
+    //    p.setPen(pen);
+    //    p.setBrush(brush);
 
-        p.drawEllipse(rect.center(), 4, 4);
-    }
+    //    p.drawEllipse(rect.center(), 4, 4);
+    //}
 
     //p.drawImage(rect().x(), rect().y(), *image_);
 }

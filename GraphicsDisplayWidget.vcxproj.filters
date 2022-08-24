@@ -57,6 +57,12 @@
     <Filter Include="Source Files\canvas">
       <UniqueIdentifier>{e297a00a-0a24-48b2-ae20-c6488652374d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\camera">
+      <UniqueIdentifier>{9285deaa-60cd-4852-be11-3fd96fd112e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\camera">
+      <UniqueIdentifier>{487f6123-18db-4657-9331-85aae8d982a7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="GraphicsDisplayWidget.qrc">
@@ -80,9 +86,6 @@
       <Filter>Source Files\capture_ui</Filter>
     </ClCompile>
     <ClCompile Include="capture_view.cpp">
-      <Filter>Source Files\capture_ui</Filter>
-    </ClCompile>
-    <ClCompile Include="ResizeableWidget.cpp">
       <Filter>Source Files\capture_ui</Filter>
     </ClCompile>
     <ClCompile Include="capture_thread.cpp">
@@ -145,6 +148,30 @@
     <ClCompile Include="canvas_background_item.cpp">
       <Filter>Source Files\canvas</Filter>
     </ClCompile>
+    <ClCompile Include="canvas_display_item.cpp">
+      <Filter>Source Files\canvas</Filter>
+    </ClCompile>
+    <ClCompile Include="ResizeableWidget.cpp">
+      <Filter>Source Files\canvas</Filter>
+    </ClCompile>
+    <ClCompile Include="camera_test.cpp">
+      <Filter>Source Files\camera</Filter>
+    </ClCompile>
+    <ClCompile Include="cam_cap_thread.cpp">
+      <Filter>Source Files\camera</Filter>
+    </ClCompile>
+    <ClCompile Include="camera.cpp">
+      <Filter>Source Files\camera</Filter>
+    </ClCompile>
+    <ClCompile Include="capturethread.cpp">
+      <Filter>Source Files\camera</Filter>
+    </ClCompile>
+    <ClCompile Include="webcam.cpp">
+      <Filter>Source Files\camera</Filter>
+    </ClCompile>
+    <ClCompile Include="qtcamera.cpp">
+      <Filter>Source Files\camera</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="capture_view.h">
@@ -183,14 +210,26 @@
     <ClInclude Include="canvas_header.h">
       <Filter>Header Files\canvas</Filter>
     </ClInclude>
+    <ClInclude Include="camera_test.h">
+      <Filter>Header Files\camera</Filter>
+    </ClInclude>
+    <ClInclude Include="cam_cap_thread.h">
+      <Filter>Header Files\camera</Filter>
+    </ClInclude>
+    <ClInclude Include="camera.h">
+      <Filter>Header Files\camera</Filter>
+    </ClInclude>
+    <ClInclude Include="webcam.h">
+      <Filter>Header Files\camera</Filter>
+    </ClInclude>
+    <ClInclude Include="qtcamera.h">
+      <Filter>Header Files\camera</Filter>
+    </ClInclude>
+    <ClInclude Include="capturethread.h">
+      <Filter>Header Files\camera</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="ResizeableWidget.h">
-      <Filter>Header Files\capture_ui</Filter>
-    </QtMoc>
-    <QtMoc Include="ResizeableTopWidget.h">
-      <Filter>Header Files\test</Filter>
-    </QtMoc>
     <QtMoc Include="SelectionWidget.h">
       <Filter>Header Files\test</Filter>
     </QtMoc>
@@ -218,5 +257,19 @@
     <QtMoc Include="canvas_scene.h">
       <Filter>Header Files\canvas</Filter>
     </QtMoc>
+    <QtMoc Include="canvas_display_item.h">
+      <Filter>Header Files\canvas</Filter>
+    </QtMoc>
+    <QtMoc Include="ResizeableWidget.h">
+      <Filter>Header Files\canvas</Filter>
+    </QtMoc>
+    <QtMoc Include="ResizeableTopWidget.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+  </ItemGroup>
+  <ItemGroup>
+    <QtUic Include="qtcamera.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
   </ItemGroup>
 </Project>

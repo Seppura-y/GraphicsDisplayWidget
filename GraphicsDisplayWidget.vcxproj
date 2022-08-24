@@ -65,7 +65,7 @@
       <AdditionalIncludeDirectories>../../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>../../lib/x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(Qt515_LIBPATH_);../../lib/x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -73,7 +73,7 @@
       <AdditionalIncludeDirectories>../../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>../../lib/x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(Qt515_LIBPATH_);../../lib/x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|Win32'" Label="Configuration">
@@ -103,13 +103,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="camera.cpp" />
+    <ClCompile Include="camera_test.cpp" />
+    <ClCompile Include="cam_cap_thread.cpp" />
     <ClCompile Include="canvas_background_item.cpp" />
+    <ClCompile Include="canvas_display_item.cpp" />
     <ClCompile Include="canvas_item_group.cpp" />
     <ClCompile Include="canvas_item.cpp" />
     <ClCompile Include="canvas_scene.cpp" />
     <ClCompile Include="canvas_view.cpp" />
     <ClCompile Include="canvas_widget.cpp" />
     <ClCompile Include="capturer.cpp" />
+    <ClCompile Include="capturethread.cpp" />
     <ClCompile Include="capture_item.cpp" />
     <ClCompile Include="capture_view.cpp" />
     <ClCompile Include="capture_thread.cpp" />
@@ -118,11 +123,13 @@
     <ClCompile Include="MovableCircle.cpp" />
     <ClCompile Include="MoveItem.cpp" />
     <ClCompile Include="my_proxy_widget.cpp" />
+    <ClCompile Include="qtcamera.cpp" />
     <ClCompile Include="ResizeableTopWidget.cpp" />
     <ClCompile Include="ResizeableWidget.cpp" />
     <ClCompile Include="SelectionWidget.cpp" />
     <ClCompile Include="test_main.cpp" />
     <ClCompile Include="vec2d.cpp" />
+    <ClCompile Include="webcam.cpp" />
     <ClCompile Include="XThread.cpp" />
     <ClCompile Include="XTools.cpp" />
     <QtRcc Include="GraphicsDisplayWidget.qrc" />
@@ -131,10 +138,15 @@
     <ClCompile Include="GraphicsDisplayWidget.cpp" />
     <ClCompile Include="ImageDisplayItem.cpp" />
     <ClCompile Include="main.cpp" />
+    <QtUic Include="qtcamera.ui" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="canvas_item_group.h" />
     <QtMoc Include="canvas_background_item.h" />
+    <QtMoc Include="canvas_display_item.h" />
+    <ClInclude Include="camera.h" />
+    <ClInclude Include="camera_test.h" />
+    <ClInclude Include="cam_cap_thread.h" />
     <ClInclude Include="canvas_header.h" />
     <QtMoc Include="canvas_scene.h" />
     <QtMoc Include="canvas_widget.h" />
@@ -142,6 +154,7 @@
     <QtMoc Include="canvas_item.h" />
     <ClInclude Include="capturer.h" />
     <QtMoc Include="capture_item.h" />
+    <ClInclude Include="capturethread.h" />
     <ClInclude Include="capture_view.h" />
     <ClInclude Include="capture_thread.h" />
     <ClInclude Include="capture_widget.h" />
@@ -150,7 +163,9 @@
     <ClInclude Include="MovableCircle.h" />
     <ClInclude Include="MoveItem.h" />
     <ClInclude Include="my_proxy_widget.h" />
+    <ClInclude Include="qtcamera.h" />
     <ClInclude Include="vec2d.h" />
+    <ClInclude Include="webcam.h" />
     <ClInclude Include="XThread.h" />
     <ClInclude Include="XTools.h" />
     <QtMoc Include="ResizeableTopWidget.h" />

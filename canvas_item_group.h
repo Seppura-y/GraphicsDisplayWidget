@@ -3,6 +3,7 @@
 #include <QGraphicsItemGroup>
 
 class CanvasItem;
+class CanvasDisplayItem;
 class DotHandler;
 
 class CanvasItemGroup : public QObject , public QGraphicsItemGroup
@@ -106,7 +107,7 @@ private:
     QRectF currentSceneBoundingRect() const;
     //void printDotsCoords(const std::string& text) const;
 
-    new_size_t calculateNewSize(const QRectF& tmpRect, CanvasItem* widget);
+    new_size_t calculateNewSize(const QRectF& tmpRect, CanvasDisplayItem* widget);
     QRectF calcNewBr();
 private:
     QVector<QGraphicsItem*> v_items_;

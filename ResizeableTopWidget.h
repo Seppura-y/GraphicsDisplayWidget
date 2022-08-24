@@ -1,5 +1,6 @@
 #pragma once
 #include <QWidget>
+#include <QLabel>
 #include <QImage>
 class ResizeableTopWidget : public QWidget
 {
@@ -75,5 +76,9 @@ private:
     QRect m_LArea, m_TArea, m_RArea, m_BArea;
 
     QImage* image_ = nullptr;
+
+    QLabel* lb_move_handler_ = nullptr;
+
+    QRect global_pos;
 };
 

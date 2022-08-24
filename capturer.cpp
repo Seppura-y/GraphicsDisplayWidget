@@ -45,7 +45,7 @@ bool Capture::CaptureInit()
 {
     HRESULT hr = S_OK;
     D3D_FEATURE_LEVEL featureLevel;
-
+    
     // Create D3D device
     for (int i = 0; i < ARRAYSIZE(DriverTypes); i++)
     {
@@ -95,7 +95,7 @@ bool Capture::CaptureInit()
     return true;
 }
 
-void unInit()
+void Capture::captureUnInit()
 {
     RESET_OBJECT(g_hDeskDupl);
     RESET_OBJECT(g_hD3dDeviceContext);

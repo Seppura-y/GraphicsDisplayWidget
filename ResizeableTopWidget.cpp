@@ -4,6 +4,11 @@
 #include <QMouseEvent>
 #include <QPen>
 #include <QBrush>
+#include <QWindow>
+#include <QPushButton>
+#include <QScreen>
+#include <QGuiApplication>
+#include <QGraphicsOpacityEffect>
 
 #define MARGIN (m_THandle.width())
 
@@ -20,6 +25,23 @@ ResizeableTopWidget::ResizeableTopWidget(QColor c, QWidget* parent)
     setWindowFlags(Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint);
     setAttribute(Qt::WA_TranslucentBackground, true);
     setMouseTracking(true);
+
+    //QScreen* screen = QGuiApplication::primaryScreen();
+
+    lb_move_handler_ = new QLabel(this);
+    lb_move_handler_->resize(60, 60);
+    lb_move_handler_->setStyleSheet("background-color: white;"
+        "border-radius: 30px;");
+    //if(screen)
+    //    lb_move_handler_->windowHandle()->setScreen(screen);
+    lb_move_handler_->setWindowOpacity(0.5);
+    //lb_move_handler_->setAttribute(Qt::WA_TranslucentBackground, true);
+    QGraphicsOpacityEffect* ef = new QGraphicsOpacityEffect();
+    ef->setOpacity(0.5);
+    lb_move_handler_->setGraphicsEffect(ef);
+    lb_move_handler_->show();
+
+    this->setMinimumSize(640, 480);
 
     //int sideVal = GlobalValues::buttonBaseSize() * 0.6;
     //int sideVal = QApplication::fontMetrics().lineSpacing() * 2.2 * 0.6;
@@ -196,6 +218,8 @@ void ResizeableTopWidget::resizeEvent(QResizeEvent*)
     //if (isVisible()) {
     //    emit geometryChanged();
     //}
+
+    lb_move_handler_->move(this->width() / 2 - 30, this->height() / 2 -30);
 }
 
 void ResizeableTopWidget::moveEvent(QMoveEvent*)
@@ -234,6 +258,11 @@ void ResizeableTopWidget::mouseReleaseEvent(QMouseEvent* e)
 void ResizeableTopWidget::mouseMoveEvent(QMouseEvent* e)
 {
     updateCursor();
+
+    if (lb_move_handler_->rect().contains(e->pos()))
+    {
+        setCursor(Qt::SizeAllCursor);
+    }
 
     if (e->buttons() != Qt::LeftButton) {
         return;

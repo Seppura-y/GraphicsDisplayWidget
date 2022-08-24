@@ -49,16 +49,16 @@ CanvasView::CanvasView(CanvasWidget* canvas, QWidget* parent) : QGraphicsView(pa
     //bg_item_->setBrush(Qt::white);
     //scene_->addItem(bg_item_);
 
-    item_test_ = new CanvasItem(z_value_ + 10);
-    item_test_->setFlag(QGraphicsItem::ItemIsSelectable, false);
-    item_test_->setFlag(QGraphicsItem::ItemIsMovable, true);
+    //item_test_ = new CanvasItem(z_value_ + 10);
+    //item_test_->setFlag(QGraphicsItem::ItemIsSelectable, false);
+    //item_test_->setFlag(QGraphicsItem::ItemIsMovable, true);
 
-    scene_->AddCustomItem(item_test_);
-    item_test_->previous_rect_ = item_test_->origin_rect_ = item_test_->sceneBoundingRect();
+    //scene_->AddCustomItem(item_test_);
+    //item_test_->previous_rect_ = item_test_->origin_rect_ = item_test_->sceneBoundingRect();
 
-    //QAction* act = menu_.addAction(QString::fromLocal8Bit("add img"));
-    //act->setEnabled(true);
-    //QObject::connect(act, &QAction::triggered, this, &CanvasView::onSigAddImage);
+    QAction* act = menu_.addAction(QString::fromLocal8Bit("add img"));
+    act->setEnabled(true);
+    QObject::connect(act, &QAction::triggered, this, &CanvasView::onSigAddImage);
 }
 
 

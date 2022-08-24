@@ -18,7 +18,7 @@ CanvasItem::CanvasItem(uint64_t zc, QGraphicsRectItem* parent) : QGraphicsRectIt
 
     //qimage_ = new QImage(":/GraphicsDisplayWidget/C:/Users/y7513/Desktop/IMG_20170903_085200.jpg");
     qimage_ = new QImage(":/GraphicsDisplayWidget/C:/Users/y7513/Desktop/screen.jpg");
-    //qInfo() << qimage_->width() << ' ' << qimage_->height() << " SIZE=" << qimage_->sizeInBytes();
+
     pixmap_ = QPixmap::fromImage(*qimage_);
     _size = pixmap_.size();
     rect_ = qimage_->rect();

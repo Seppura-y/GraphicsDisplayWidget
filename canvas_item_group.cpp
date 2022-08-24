@@ -1,5 +1,6 @@
 #include "canvas_item_group.h"
 #include "canvas_item.h"
+#include "canvas_display_item.h"
 #include "dot_handler.h"
 #include "canvas_header.h"
 #include "vec2d.h"
@@ -164,8 +165,9 @@ void CanvasItemGroup::addItemToGroup(QGraphicsItem* item)
     {
         if (it->type() == eBorderDot) continue;
         scene_tmp = scene_tmp.united(it->sceneBoundingRect());
-        auto widget = qgraphicsitem_cast<CanvasItem*>(it);
+        auto widget = qgraphicsitem_cast<CanvasDisplayItem*>(it);
         widget->setInGroup(true);
+        installSceneEventFilter(it);
     }
 
     sceneRectItemGroup_ = scene_tmp;
@@ -188,7 +190,7 @@ void CanvasItemGroup::removeItemFromGroup(QGraphicsItem* item)
 {
     if (item->type() != eBorderDot && item->type() != eBackgroundItem) 
     {
-        auto widget = qgraphicsitem_cast<CanvasItem*>(item);
+        auto widget = qgraphicsitem_cast<CanvasDisplayItem*>(item);
         if (!widget)return;
         widget->setInGroup(false);
         //        LOG_DEBUG(logger, "REMOVE ", item, ", type = ", item->type());
@@ -421,7 +423,7 @@ void CanvasItemGroup::resizeTopLeft(const QPointF& pt)
 
 
     for (auto& it : v_items_) {
-        auto widget = qgraphicsitem_cast<CanvasItem*>(it);
+        auto widget = qgraphicsitem_cast<CanvasDisplayItem*>(it);
 
         auto new_size = calculateNewSize(tmpRect, widget);
 
@@ -488,7 +490,7 @@ void CanvasItemGroup::resizeTopRight(const QPointF& pt)
 
 
     for (auto& it : v_items_) {
-        auto widget = qgraphicsitem_cast<CanvasItem*>(it);
+        auto widget = qgraphicsitem_cast<CanvasDisplayItem*>(it);
 
         auto new_size = calculateNewSize(tmpRect, widget);
 
@@ -557,7 +559,7 @@ void CanvasItemGroup::resizeBottomLeft(const QPointF& pt)
 
 
     for (auto& it : v_items_) {
-        auto widget = qgraphicsitem_cast<CanvasItem*>(it);
+        auto widget = qgraphicsitem_cast<CanvasDisplayItem*>(it);
 
         auto new_size = calculateNewSize(tmpRect, widget);
 
@@ -628,7 +630,7 @@ void CanvasItemGroup::resizeBottomRight(const QPointF& pt)
 
 
     for (auto& it : v_items_) {
-        auto widget = qgraphicsitem_cast<CanvasItem*>(it);
+        auto widget = qgraphicsitem_cast<CanvasDisplayItem*>(it);
 
         auto new_size = calculateNewSize(tmpRect, widget);
 
@@ -642,7 +644,7 @@ void CanvasItemGroup::resizeBottomRight(const QPointF& pt)
     setPositionGrabbers();
 }
 
-CanvasItemGroup::new_size_t CanvasItemGroup::calculateNewSize(const QRectF& tmpRect, CanvasItem* widget)
+CanvasItemGroup::new_size_t CanvasItemGroup::calculateNewSize(const QRectF& tmpRect, CanvasDisplayItem* widget)
 {
     qreal old_ig_w = boundingRect().width();
     qreal old_ig_h = boundingRect().height();
