@@ -23,9 +23,9 @@ extern"C"
 #include "libavcodec/avcodec.h"
 #include "libswscale/swscale.h"
 }
-#pragma comment(lib,"avcodec.lib")
-#pragma comment(lib,"swscale.lib")
-#pragma comment(lib,"avutil.lib")
+//#pragma comment(lib,"avcodec.lib")
+//#pragma comment(lib,"swscale.lib")
+//#pragma comment(lib,"avutil.lib")
 
 GraphicsDisplayWidget::GraphicsDisplayWidget(QWidget *parent) : QMainWindow(parent)
 {

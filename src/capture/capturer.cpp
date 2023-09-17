@@ -251,7 +251,7 @@ bool Capture::ScaleInit()
     memset(plinesize_, 0, sizeof(plinesize_));
     pImgData_ = new unsigned char[g_Width_ * g_Height_ * 4];
     swsCtx_ = sws_getCachedContext(swsCtx_, g_Width_, g_Height_, AV_PIX_FMT_BGRA,
-        out_Width_, out_Height_, AV_PIX_FMT_YUV420P,
+        out_Width_, out_Height_, AV_PIX_FMT_ARGB,
         SWS_BILINEAR,
         0, 0, 0);
     if (!swsCtx_)
@@ -291,7 +291,8 @@ AVFrame* Capture::ImgDataScale(void* data, int* linesize)
     AVFrame* outFrame = av_frame_alloc();
     outFrame->width = out_Width_;
     outFrame->height = out_Height_;
-    outFrame->format = AV_PIX_FMT_YUV420P;
+    //outFrame->format = AV_PIX_FMT_YUV420P;
+    outFrame->format = AV_PIX_FMT_BGR24;
     outFrame->pts = 0;
 
     int ret = av_frame_get_buffer(outFrame, 0);

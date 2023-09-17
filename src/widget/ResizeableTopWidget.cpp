@@ -41,7 +41,7 @@ ResizeableTopWidget::ResizeableTopWidget(QColor c, QWidget* parent)
     lb_move_handler_->setGraphicsEffect(ef);
     lb_move_handler_->show();
 
-    this->setMinimumSize(640, 480);
+    //this->setMinimumSize(640, 480);
 
     //int sideVal = GlobalValues::buttonBaseSize() * 0.6;
     //int sideVal = QApplication::fontMetrics().lineSpacing() * 2.2 * 0.6;

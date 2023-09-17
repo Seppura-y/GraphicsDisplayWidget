@@ -23,8 +23,8 @@ CanvasWidget::CanvasWidget(QWidget* parent) : QMainWindow(parent)
 
 void CanvasWidget::resizeEvent(QResizeEvent * ev)
 {
-	view_->setGeometry(0, 0, this->width(), this->height());
 	QWidget::resizeEvent(ev);
+	view_->setGeometry(0, 0, this->width(), this->height());
 }
 
 void CanvasWidget::mousePressEvent(QMouseEvent* ev)

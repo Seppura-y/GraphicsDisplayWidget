@@ -48,8 +48,8 @@ CanvasDisplayItem::CanvasDisplayItem(uint64_t z, QGraphicsRectItem* parent) : QG
 
     output_width_ = cap_th_->getInputWidth();
     output_height_ = cap_th_->getInputHeight();
-    output_width_ = 1280;
-    output_height_ = 720;
+    //output_width_ = 1280;
+    //output_height_ = 720;
     rect_ = QRect(0, 0, output_width_, output_height_);
 
     ret = cap_th_->InitScale(output_width_, output_height_);
@@ -88,13 +88,13 @@ void CanvasDisplayItem::paint(QPainter* painter, const QStyleOptionGraphicsItem*
     QRectF scene_bounding_rect = this->sceneBoundingRect();
     QRectF bounding_rect = boundingRect();
     QRectF shape_rect = shape().boundingRect();
-    cout << "parent scene rect : " << scene_rect_.x() << " : " << scene_rect_.y() << " : " << scene_rect_.width() << " : " << scene_rect_.height() << endl;
-    cout << "bounding_rect : " << bounding_rect.x() << " : " << bounding_rect.y() << " : " << bounding_rect.width() << " : " << bounding_rect.height() << endl;
-    cout << "scene_bounding_rect : " << scene_bounding_rect.x() << " : " << scene_bounding_rect.y() << " : " << scene_bounding_rect.width() << " : " << scene_bounding_rect.height() << endl;
-    cout << "shape_rect : " << shape_rect.x() << " : " << shape_rect.y() << " : " << shape_rect.width() << " : " << shape_rect.height() << endl;
+    //cout << "parent scene rect : " << scene_rect_.x() << " : " << scene_rect_.y() << " : " << scene_rect_.width() << " : " << scene_rect_.height() << endl;
+    //cout << "bounding_rect : " << bounding_rect.x() << " : " << bounding_rect.y() << " : " << bounding_rect.width() << " : " << bounding_rect.height() << endl;
+    //cout << "scene_bounding_rect : " << scene_bounding_rect.x() << " : " << scene_bounding_rect.y() << " : " << scene_bounding_rect.width() << " : " << scene_bounding_rect.height() << endl;
+    //cout << "shape_rect : " << shape_rect.x() << " : " << shape_rect.y() << " : " << shape_rect.width() << " : " << shape_rect.height() << endl;
 
-    QRectF intersect_rect = scene_rect_.intersected(scene_bounding_rect);
-    cout << "intersect_rect : " << intersect_rect.x() << " : " << intersect_rect.y() << " : " << intersect_rect.width() << " : " << intersect_rect.height() << endl << endl;;
+    //QRectF intersect_rect = scene_rect_.intersected(scene_bounding_rect);
+    //cout << "intersect_rect : " << intersect_rect.x() << " : " << intersect_rect.y() << " : " << intersect_rect.width() << " : " << intersect_rect.height() << endl << endl;;
 
     painter->drawImage(boundingRect(), display_img_);
     qreal wsize = 2;
@@ -141,7 +141,8 @@ void CanvasDisplayItem::setImageData(const unsigned char* raw_data, int width, i
 {
     //auto b = image_.loadFromData(raw_data, size);
     //image_ = QImage::fromData(raw_data, size);
-    display_img_ = QImage(raw_data, width, height, QImage::Format::Format_RGBX8888);
+    //display_img_ = QImage(raw_data, width, height, QImage::Format::Format_RGBX8888);
+    display_img_ = QImage(raw_data, width, height, QImage::Format::Format_ARGB32);
     if (first_save_)
     {
         image_.save("out.jpg");
@@ -219,7 +220,7 @@ void CanvasDisplayItem::timerEvent(QTimerEvent* ev)
 {
     if (cap_th_)
     {
-        auto a = cap_th_->getImageData();
+        //auto a = cap_th_->getImageData();
         this->setImageData(cap_th_->getImageData(), output_width_, output_height_);
         this->update();
     }

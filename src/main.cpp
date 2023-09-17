@@ -7,8 +7,6 @@
 //#include <QtGui/QApplication>
 #include <QtWidgets/QApplication>
 
-
-
 int main(int argc, char *argv[])
 {
 	QApplication a(argc, argv);
@@ -18,10 +16,10 @@ int main(int argc, char *argv[])
 	//ResizeableTopWidget resize_top_wid();
 	//resize_top_wid.show();
 
-	CanvasWidget canvas_wid;
-	canvas_wid.show();
+	//CanvasWidget canvas_wid;
+	//canvas_wid.show();
 
-	//GraphicsDisplayWidget display_wid;
-	//display_wid.show();
+	GraphicsDisplayWidget display_wid;
+	display_wid.show();
 	return a.exec();
 }

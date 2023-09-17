@@ -9,6 +9,41 @@
 *.user
 *.userosscache
 *.sln.docstates
+*.json
+
+
+# Binaries
+*/bin/
+*/build/
+*/lib/
+*/example/
+*/assets/textures
+*/assets/objs
+*/assets/fonts
+*/assets/icons
+*/vendor/
+*/res
+/dependencies/*
+
+# Donut files
+*.log
+
+# Visual Studio files and folder
+.vs/
+**.sln
+**.vcxproj
+**.vcxproj.filters
+**.vcxproj.user
+
+# Directories
+assets
+include
+res
+bin
+build
+lib
+scripts/__pycache__
+CMakeFiles
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
@@ -32,6 +67,10 @@ bld/
 [Oo]ut/
 [Ll]og/
 [Ll]ogs/
+
+#user directory
+bin/
+bin-int/
 
 # Visual Studio 2015/2017 cache/options directory
 .vs/
@@ -361,3 +400,5 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+*.json

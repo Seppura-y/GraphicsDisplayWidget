@@ -249,7 +249,7 @@ void CanvasScene::drawForeground(QPainter* painter, const QRectF& rect)
     painter->save();
     qreal wsize = 2;
     //QPen outline_pen{QColor(22, 142, 153), wsize};
-    QPen outline_pen{ QColor("orange"), wsize };
+    QPen outline_pen{ QColor("green"), wsize };
     outline_pen.setCosmetic(true);
     painter->setPen(outline_pen);
     auto r = item_group_->sceneBoundingRect();
@@ -351,6 +351,7 @@ void CanvasScene::onAddImageItem()
     //item->setFlags(QGraphicsItem::ItemIsSelectable | QGraphicsItem::ItemIsMovable | QGraphicsItem::ItemIsFocusable);
     item->setBoundaryPath(path);
     item->setParentSceneRect(this->sceneRect());
+    item->setRect(0, 0, 1280, 720);
     this->addItem(item);
     l_items_.push_back(item);
     
@@ -376,6 +377,7 @@ bool CanvasScene::IsEmpty()
 
 void CanvasScene::ItemsTransformation(QTransform matrix)
 {
+    int size = l_items_.size();
     for (auto i : l_items_)
     {
         auto item = qgraphicsitem_cast<CanvasDisplayItem*>(i);

@@ -178,7 +178,7 @@ void CanvasItemGroup::addItemToGroup(QGraphicsItem* item)
             corner_handle[i] = new DotHandler(this);
             //            qDebug()<<"ALLOCATE: "<< (void*)cornerGrabber[i];
         }
-        hideGrabbers();
+        //hideGrabbers();
     }
 
     setPositionGrabbers();
